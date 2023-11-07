@@ -4,6 +4,22 @@ import { getMethods } from './methods/index.js'
 import { openApiSpec } from './open_api.js'
 import { getOperations } from './operations.js'
 
+
+import { createClient } from '@supabase/supabase-js';
+import { Auth } from '@supabase/auth-ui-react';
+import { ThemeSupa } from '@supabase/auth-ui-shared';
+
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_API_KEY);
+
+const App = () => (
+  <Auth
+    supabaseClient={supabase}
+    appearance={{ theme: ThemeSupa }}
+    providers={['google', 'facebook', 'twitter']}
+  />
+);
+
+
 export class NetlifyAPI {
   constructor(firstArg, secondArg) {
     // variadic arguments
